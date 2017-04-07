@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lawcloud.lawper.dao.UserInfoDao">
+  <resultMap id="BaseResultMap" type="com.lawcloud.lawper.model.UserInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="usertype" jdbcType="VARCHAR" property="usertype" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="country_id" jdbcType="BIGINT" property="countryId" />
+  </resultMap>
+
+  <select id="selectUserInfo" parameterType="com.lawcloud.lawper.model.UserInfo"
+          resultType="com.lawcloud.lawper.model.UserInfoDetail">
+    SELECT
+    u.id as id ,
+    u.username as username ,
+    u.password as password ,
+    u.usertype as usertype ,
+    co.countryname as countryName,
+    ci.`name` as cityName
+    FROM
+    user_info u
+    LEFT JOIN country co ON u.country_id = co.Id
+    LEFT JOIN city ci ON u.city_id = ci.id
+    where 1=1
+    <if test="username != null and username != ''  ">
+      and username like '%${username}%'
+    </if>
+    <if test="password != null and password != ''">
+      and password like '%${password}%'
+    </if>
+    <if test="usertype != null and usertype != '' ">
+      and usertype = #{usertype}
+    </if>
+
+    order by u.id desc
+
+  </select>
+
+</mapper>
