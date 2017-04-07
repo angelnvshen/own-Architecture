@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <!-- 文件输出格式 -->
+    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n "/>
+
+    <!-- 日志文件的位置-->
+    <!-- CATALINA_HOME 为tomcat的目录，如果没有配置，则取 LOG_PATH的值，LOG_PATH为 application.properties中的logging.path的值，【可见spring-boot文档】 -->
+    <property name="log_path" value="${CATALINA_HOME:-${LOG_PATH}}" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 每天产生一个文件 -->
+    <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${log_path}/lawCloudLawper/log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!-- 将日志写入数据库 -->
+    <!--<appender name="db-classic-mysql-pool" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+            <dataSource class="org.apache.commons.dbcp.BasicDataSource">
+                <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                <url>jdbc:mysql://172.16.252.231:3306/law_cloud_lyt_dev</url>
+                <username>userlog</username>
+                <password>abcd1234</password>
+            </dataSource>
+        </connectionSource>
+    </appender>-->
+
+    <logger name="com.lawcloud.lawCloudLawper.configuration.TestScheduledTasks" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <!--<appender-ref ref="TEST-FILE"/>-->
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="TEST-FILE"/>
+         <!--<appender-ref ref="db-classic-mysql-pool"/> -->
+    </root>
+
+</configuration>

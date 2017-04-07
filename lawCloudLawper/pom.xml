@@ -28,6 +28,11 @@
         <mysql.version>5.1.29</mysql.version>
         <spring.version>4.1.2.RELEASE</spring.version>
         <mybatis.spring.version>1.2.4</mybatis.spring.version>
+        <!-- 日志 logback版本-->
+        <logback.version>1.1.6</logback.version>
+        <log4j.version>1.2.17</log4j.version>
+        <logback-ext-spring.version>0.1.2</logback-ext-spring.version>
+        <slf4j-api.version>1.7.21</slf4j-api.version>
     </properties>
 
     <dependencies>
@@ -36,11 +41,6 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
 
         <!--web-->
@@ -195,6 +195,34 @@
             <artifactId>mapper</artifactId>
             <version>${mapper.version}</version>
         </dependency>
+
+        <!-- 日志 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>${logback-ext-spring.version}</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
