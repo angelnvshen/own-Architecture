@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
+<configuration>
 
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n "/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n"/>
 
     <!-- 日志文件的位置-->
     <!-- CATALINA_HOME 为tomcat的目录，如果没有配置，则取 LOG_PATH的值，LOG_PATH为 application.properties中的logging.path的值，【可见spring-boot文档】 -->
@@ -10,7 +12,7 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${PATTERN}</pattern>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
@@ -41,15 +43,15 @@
         </connectionSource>
     </appender>-->
 
-    <logger name="com.lawcloud.lawCloudLawper.configuration.TestScheduledTasks" level="info" additivity="false">
-        <appender-ref ref="CONSOLE"/>
-        <!--<appender-ref ref="TEST-FILE"/>-->
-    </logger>
-
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="TEST-FILE"/>
          <!--<appender-ref ref="db-classic-mysql-pool"/> -->
     </root>
+
+    <logger name="druid.sql" level="debug" />
+    <logger name="druid.sql.Statement" level="debug">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
 
 </configuration>

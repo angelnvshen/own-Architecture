@@ -79,9 +79,9 @@
                         <value>
                             helperDialect=mysql
                             reasonable=true
-                            supportMethodsArguments=true
+                            <!--supportMethodsArguments=true
                             params=count=countSql
-                            autoRuntimeDialect=true
+                            autoRuntimeDialect=true-->
                         </value>
                     </property>
                 </bean>
