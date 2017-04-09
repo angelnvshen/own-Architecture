@@ -69,15 +69,20 @@
         <intercept-url pattern="/authentication_failure_url" access="hasRole('ANONYMOUS')" />
         <intercept-url pattern="/**" access="hasRole('USER')"/>
     </http>
-    
+
+    <!--
+        需要注意的是使用 jdbc-user-service 定义的 UserDetailsService 是不支持用户组权限的，
+        如果需要支持用户组权限的话需要我们使用 JdbcDaoImpl
+    -->
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user" password="user" authorities="ROLE_USER" />
-                <user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>
+
+    <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="enableGroups" value="true"/>
+        <beans:property name="rolePrefix" value="ROLE_"/>
+    </beans:bean>
 
     <!-- 认证成功后的处理类 -->
     <beans:bean id="authSuccess" class="com.lawcloud.lawper.security.AuthenticationSuccessHandlerImpl"/>
