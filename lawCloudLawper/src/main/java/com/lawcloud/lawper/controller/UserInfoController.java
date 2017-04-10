@@ -2,6 +2,7 @@ package com.lawcloud.lawper.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lawcloud.lawper.common.controller.BashController;
+import com.lawcloud.lawper.common.util.AppCodeConstantUtil;
 import com.lawcloud.lawper.model.UserInfo;
 import com.lawcloud.lawper.model.UserInfoDetail;
 import com.lawcloud.lawper.service.UserInfoService;
@@ -33,6 +34,8 @@ public class UserInfoController extends BashController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private AppCodeConstantUtil util;
     /**
      * 查询userInfo 联表查询
      *
@@ -89,5 +92,18 @@ public class UserInfoController extends BashController {
 
         System.out.println(result.getStatusCode());
         return result.getBody();
+    }
+
+    /**
+     * 测试读取配置文件属性
+     *
+     * @param key key
+     * @return value
+     */
+    @ResponseBody
+    @RequestMapping("utilTest")
+    public String getValueFromPropertiesFile(@RequestParam(defaultValue = "hello") String key) {
+        String value = util.getProperty(key);
+        return " [key] " + key + " : " + "[value] " + value;
     }
 }

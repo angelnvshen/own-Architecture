@@ -132,4 +132,9 @@
         </property>
     </bean>
 
+    <!-- util -->
+    <bean id="appCodeConstantUtil" class="com.lawcloud.lawper.common.util.AppCodeConstantUtil">
+        <property name="env" ref="environment" />
+    </bean>
+
 </beans>
