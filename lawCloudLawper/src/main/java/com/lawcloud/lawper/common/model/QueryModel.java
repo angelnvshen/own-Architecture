@@ -1,5 +1,8 @@
 package com.lawcloud.lawper.common.model;
 
+/**
+ * 查询model，所有其他实体model可以继承。
+ */
 public class QueryModel {
     private Integer pageNum;
     private Integer pageSize;

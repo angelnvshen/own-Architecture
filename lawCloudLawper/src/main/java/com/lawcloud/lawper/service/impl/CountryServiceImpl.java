@@ -16,15 +16,23 @@ import java.util.List;
 @Service("countryService")
 public class CountryServiceImpl extends BaseService<Country> implements CountryService {
 
+    /**
+     * 查询country信息
+     *
+     * @param country 查询实体
+     * @param page    页码
+     * @param rows    行数
+     * @return
+     */
     @Override
     public List<Country> selectByCountry(Country country, int page, int rows) {
         Example example = new Example(Country.class);
         Example.Criteria criteria = example.createCriteria();
-        if (StringUtil.isNotEmpty(country.getCountryname())) {
-            criteria.andLike("countryname", "%" + country.getCountryname() + "%");
+        if (StringUtil.isNotEmpty(country.getCountryName())) {
+            criteria.andLike("countryName", "%" + country.getCountryName() + "%");
         }
-        if (StringUtil.isNotEmpty(country.getCountrycode())) {
-            criteria.andLike("countrycode", "%" + country.getCountrycode() + "%");
+        if (StringUtil.isNotEmpty(country.getCountryCode())) {
+            criteria.andLike("countryCode", "%" + country.getCountryCode() + "%");
         }
         if (country.getId() != null) {
             criteria.andEqualTo("id", country.getId());

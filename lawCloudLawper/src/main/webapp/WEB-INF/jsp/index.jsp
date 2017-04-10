@@ -32,9 +32,9 @@
             <table class="gridtable" style="width:100%;">
                 <tr>
                     <th>国家(地区)名称：</th>
-                    <td><input type="text" name="countryname" value="${queryParam.countryname}"/></td>
+                    <td><input type="text" name="countryName" value="${queryParam.countryName}"/></td>
                     <th>国家(地区)代码：</th>
-                    <td><input type="text" name="countrycode" value="${queryParam.countrycode}"/></td>
+                    <td><input type="text" name="countryCode" value="${queryParam.countryCode}"/></td>
                     <td rowspan="2"><input type="submit" value="查询"/></td>
                 </tr>
                 <tr>
@@ -123,8 +123,8 @@
                 <c:forEach items="${pageInfo.list}" var="country">
                     <tr>
                         <td>${country.id}</td>
-                        <td>${country.countryname}</td>
-                        <td>${country.countrycode}</td>
+                        <td>${country.countryName}</td>
+                        <td>${country.countryCode}</td>
                         <td style="text-align:center;">[<a
                                 href="${pageContext.request.contextPath}/view?id=${country.id}">修改</a>] -
                             [<a href="${pageContext.request.contextPath}/delete?id=${country.id}">删除</a>]
@@ -137,7 +137,7 @@
                 <tr>
                     <c:if test="${pageInfo.hasPreviousPage}">
                         <td>
-                            <a href="${pageContext.request.contextPath}/list?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">前一页</a>
+                            <a href="${pageContext.request.contextPath}/list?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}&countryName=${queryParam.countryName}&countryCode=${queryParam.countryCode}">前一页</a>
                         </td>
                     </c:if>
                     <c:forEach items="${pageInfo.navigatepageNums}" var="nav">
@@ -146,13 +146,13 @@
                         </c:if>
                         <c:if test="${nav != pageInfo.pageNum}">
                             <td>
-                                <a href="${pageContext.request.contextPath}/list?page=${nav}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">${nav}</a>
+                                <a href="${pageContext.request.contextPath}/list?page=${nav}&rows=${pageInfo.pageSize}&countryName=${queryParam.countryName}&countryCode=${queryParam.countryCode}">${nav}</a>
                             </td>
                         </c:if>
                     </c:forEach>
                     <c:if test="${pageInfo.hasNextPage}">
                         <td>
-                            <a href="${pageContext.request.contextPath}/list?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">下一页</a>
+                            <a href="${pageContext.request.contextPath}/list?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&countryName=${queryParam.countryName}&countryCode=${queryParam.countryCode}">下一页</a>
                         </td>
                     </c:if>
                 </tr>

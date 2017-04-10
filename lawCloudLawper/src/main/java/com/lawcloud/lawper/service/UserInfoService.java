@@ -13,10 +13,10 @@ public interface UserInfoService extends IService<UserInfo> {
     /**
      * 联表查询
      *
-     * @param userInfo
-     * @param page
-     * @param rows
-     * @return
+     * @param userInfo 查询实体
+     * @param page     页码
+     * @param rows     行数
+     * @return 返回对象集合和页码信息
      */
     PageInfo<UserInfoDetail> selectUserInfo(UserInfo userInfo, int page, int rows);
 

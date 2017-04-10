@@ -13,9 +13,9 @@
         </tr>
         <tr>
             <th>国家(地区)名称：</th>
-            <td><input type="text" name="countryname" value="${country.countryname}"/></td>
+            <td><input type="text" name="countryName" value="${country.countryName}"/></td>
             <th>国家(地区)代码：</th>
-            <td><input type="text" name="countrycode" value="${country.countrycode}"/></td>
+            <td><input type="text" name="countryCode" value="${country.countryCode}"/></td>
             <td><input type="submit" value="保存"/></td>
         </tr>
     </table>

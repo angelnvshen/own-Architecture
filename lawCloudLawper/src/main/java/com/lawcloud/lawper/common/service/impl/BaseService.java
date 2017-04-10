@@ -25,15 +25,25 @@
 package com.lawcloud.lawper.common.service.impl;
 
 import com.lawcloud.lawper.common.service.IService;
+import com.lawcloud.lawper.controller.UserInfoController;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
 /**
- * 基类 - 共有的增删查改，可以添加其他公共的方法
+ * 基类
+ *  共有的增删查改，可以添加其他公共的方法
+ *  共有的变量
  */
 public abstract class BaseService<T> implements IService<T> {
+
+    /*
+     *日志公共变量
+     */
+    protected Log log = LogFactory.getLog(UserInfoController.class);
 
     @Autowired
     protected Mapper<T> mapper;
@@ -42,27 +52,57 @@ public abstract class BaseService<T> implements IService<T> {
         return mapper;
     }
 
+    /**
+     * 根据实体对象的主键查询
+     * @param key
+     * @return
+     */
     @Override
     public T selectByKey(Object key) {
         return mapper.selectByPrimaryKey(key);
     }
 
+    /**
+     * 保存实体对象
+     * @param entity
+     * @return
+     */
     public int save(T entity) {
         return mapper.insert(entity);
     }
 
+    /**
+     * 根据实体对象主键 删除
+     * @param key
+     * @return
+     */
     public int delete(Object key) {
         return mapper.deleteByPrimaryKey(key);
     }
 
+    /**
+     * 更新实体对象
+     * @param entity
+     * @return
+     */
     public int updateAll(T entity) {
         return mapper.updateByPrimaryKey(entity);
     }
 
+    /**
+     * 部分更新实体对象，如果对象的某个属性为空，则自动忽略，不更新这个属性。
+     * @param entity
+     * @return
+     */
     public int updateNotNull(T entity) {
         return mapper.updateByPrimaryKeySelective(entity);
     }
 
+    /**
+     * example,类似 hibernate
+     * @param example
+     * @return
+     */
     public List<T> selectByExample(Object example) {
         return mapper.selectByExample(example);
     }
