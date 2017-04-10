@@ -1,7 +1,7 @@
 package com.lawcloud.lawper.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.lawcloud.lawper.common.controller.BashController;
+import com.lawcloud.lawper.common.base.controller.BashController;
 import com.lawcloud.lawper.model.Country;
 import com.lawcloud.lawper.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.lawcloud.lawper.common.controller;
+package com.lawcloud.lawper.common.base.controller;
 
 import com.lawcloud.lawper.controller.UserInfoController;
 import org.apache.commons.logging.Log;

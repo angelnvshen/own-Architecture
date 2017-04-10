@@ -24,7 +24,7 @@
 
 package com.lawcloud.lawper.dao;
 
-import com.lawcloud.lawper.common.mapper.CommonMapper;
+import com.lawcloud.lawper.common.base.mapper.CommonMapper;
 import com.lawcloud.lawper.model.Country;
 
 public interface CountryDao extends CommonMapper<Country> {

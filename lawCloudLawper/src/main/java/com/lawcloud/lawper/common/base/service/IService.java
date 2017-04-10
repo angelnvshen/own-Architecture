@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.lawcloud.lawper.common.service;
+package com.lawcloud.lawper.common.base.service;
 
 import org.springframework.stereotype.Service;
 

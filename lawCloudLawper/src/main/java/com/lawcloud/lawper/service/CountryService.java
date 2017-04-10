@@ -1,6 +1,6 @@
 package com.lawcloud.lawper.service;
 
-import com.lawcloud.lawper.common.service.IService;
+import com.lawcloud.lawper.common.base.service.IService;
 import com.lawcloud.lawper.model.Country;
 
 import java.util.List;

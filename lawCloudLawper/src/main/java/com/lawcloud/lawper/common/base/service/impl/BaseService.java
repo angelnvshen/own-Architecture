@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.lawcloud.lawper.common.service.impl;
+package com.lawcloud.lawper.common.base.service.impl;
 
-import com.lawcloud.lawper.common.service.IService;
+import com.lawcloud.lawper.common.base.service.IService;
 import com.lawcloud.lawper.controller.UserInfoController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

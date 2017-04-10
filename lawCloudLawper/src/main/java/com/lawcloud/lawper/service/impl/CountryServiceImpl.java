@@ -1,7 +1,7 @@
 package com.lawcloud.lawper.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.lawcloud.lawper.common.service.impl.BaseService;
+import com.lawcloud.lawper.common.base.service.impl.BaseService;
 import com.lawcloud.lawper.model.Country;
 import com.lawcloud.lawper.service.CountryService;
 import org.springframework.stereotype.Service;

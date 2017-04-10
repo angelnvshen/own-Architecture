@@ -1,4 +1,4 @@
-package com.lawcloud.lawper.common.model;
+package com.lawcloud.lawper.common.base.model;
 
 /**
  * 查询model，所有其他实体model可以继承。

@@ -24,7 +24,7 @@
 
 package com.lawcloud.lawper.model;
 
-import com.lawcloud.lawper.common.model.QueryModel;
+import com.lawcloud.lawper.common.base.model.QueryModel;
 
 public class CountryQueryModel extends QueryModel {
 

@@ -2,7 +2,7 @@ package com.lawcloud.lawper.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lawcloud.lawper.common.service.impl.BaseService;
+import com.lawcloud.lawper.common.base.service.impl.BaseService;
 import com.lawcloud.lawper.dao.UserInfoDao;
 import com.lawcloud.lawper.model.UserInfo;
 import com.lawcloud.lawper.model.UserInfoDetail;
