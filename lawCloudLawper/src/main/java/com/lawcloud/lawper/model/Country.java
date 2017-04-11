@@ -62,4 +62,13 @@ public class Country {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", countryName='" + countryName + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                '}';
+    }
 }
