@@ -14,12 +14,23 @@
 
     <!--RequestMappingHandlerAdapter-->
     <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.mobile.device.DeviceWebArgumentResolver"/>
+            <bean class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver"/>
+        </mvc:argument-resolvers>
         <mvc:message-converters>
             <ref bean="stringHttpMessageConverter"/>
             <ref bean="mappingJackson2HttpMessageConverter"/>
             <ref bean="marshallingHttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <!-- On pre-handle, resolve the device that originated the web request -->
+        <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor"/>
+        <!-- On pre-handle, manage the user's site preference (declare after DeviceResolverHandlerInterceptor) -->
+        <bean class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor"/>
+    </mvc:interceptors>
 
     <context:component-scan base-package="com.lawcloud.lawper.controller"/>
 
@@ -83,9 +94,16 @@
         </property>
         <property name="viewResolvers">
             <list>
-                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                    <property name="prefix" value="/WEB-INF/jsp/"/>
-                    <property name="suffix" value=".jsp"/>
+                <bean class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
+                    <constructor-arg>
+                        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                            <property name="prefix" value="/WEB-INF/jsp/" />
+                            <property name="suffix" value=".jsp" />
+                        </bean>
+                    </constructor-arg>
+                    <property name="enableFallback" value="true" />
+                   <!-- <property name="mobilePrefix" value="mobile/" />
+                    <property name="tabletPrefix" value="tablet/" />-->
                 </bean>
             </list>
         </property>
@@ -98,6 +116,12 @@
             </list>
         </property>
     </bean>
+
+    <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 静态资源映射 -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
 
     <!--国际化-->
     <bean id="messageSource"
