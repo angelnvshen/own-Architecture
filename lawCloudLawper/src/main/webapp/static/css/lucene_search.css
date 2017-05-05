@@ -1,0 +1,24 @@
+#search {
+    padding-bottom: 9px;
+}
+
+#page.page-nav {
+    position: relative;
+    overflow: visible;
+}
+
+#page .nums {
+    position: absolute;
+    right: -195px;
+    top: 11px;
+}
+
+.tangram-suggestion {
+    width: 550px;
+}
+
+@-moz-document url-prefix(){
+    .tangram-suggestion {
+        margin-left: 0px;
+    }
+}

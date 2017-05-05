@@ -3,9 +3,13 @@ package com.lawcloud.lawper.controller;
 import com.github.pagehelper.PageInfo;
 import com.lawcloud.lawper.common.base.controller.BashController;
 import com.lawcloud.lawper.common.util.AppCodeConstantUtil;
+import com.lawcloud.lawper.common.util.analyzer.MyIkAnalyzer;
 import com.lawcloud.lawper.model.UserInfo;
 import com.lawcloud.lawper.model.UserInfoDetail;
 import com.lawcloud.lawper.service.UserInfoService;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -36,6 +42,7 @@ public class UserInfoController extends BashController {
 
     @Autowired
     private AppCodeConstantUtil util;
+
     /**
      * 查询userInfo 联表查询
      *
@@ -55,27 +62,26 @@ public class UserInfoController extends BashController {
 
     /**
      * restTemplate 调用测试
-     * @param userInfo
-            {
-                "username":"test1"
-            }
-     * @return
-         * {
-            "pageNum": 1,
-            "pageSize": 10,
-            "list": [
-            {
-            "id": 1,
-            "username": "test1",
-            "password": "12345678",
-            "usertype": "1",
-            ....
-            "countryName": "Angola",
-            "cityName": "石家庄"
-            }
-            ],
-            ....
-            }
+     *
+     * @param userInfo {
+     *                 "username":"test1"
+     *                 }
+     * @return {
+     * "pageNum": 1,
+     * "pageSize": 10,
+     * "list": [
+     * {
+     * "id": 1,
+     * "username": "test1",
+     * "password": "12345678",
+     * "usertype": "1",
+     * ....
+     * "countryName": "Angola",
+     * "cityName": "石家庄"
+     * }
+     * ],
+     * ....
+     * }
      * @throws URISyntaxException
      */
     @ResponseBody
@@ -105,5 +111,34 @@ public class UserInfoController extends BashController {
     public String getValueFromPropertiesFile(@RequestParam(defaultValue = "hello") String key) {
         String value = util.getProperty(key);
         return " [key] " + key + " : " + "[value] " + value;
+    }
+
+    @ResponseBody
+    @RequestMapping("testLucene")
+    public String testLucene() throws IOException {
+
+        String str = "体质等方面全面发展";
+
+        Analyzer analyzer = null;
+        analyzer = new MyIkAnalyzer();
+        print(analyzer, str);
+
+        analyzer = new MyIkAnalyzer(true);
+        print(analyzer, str);
+        return "parse indexStr";
+    }
+
+    public static void print(Analyzer analyzer, String parseStr) throws IOException {
+        StringReader reader = new StringReader(parseStr);
+        TokenStream tokenStream = analyzer.tokenStream("", reader);
+        tokenStream.reset();
+
+        CharTermAttribute termAttribute = tokenStream.getAttribute(CharTermAttribute.class);
+
+        System.out.println("分词技术：" + analyzer.getClass());
+        while (tokenStream.incrementToken()) {
+            System.out.print(termAttribute.toString() + "|");
+        }
+        System.out.println();
     }
 }
