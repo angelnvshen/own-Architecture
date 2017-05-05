@@ -134,9 +134,9 @@ a:hover {
 	box-shadow: 1px 1px 2px #ccc;
 	-moz-box-shadow: 1px 1px 2px #ccc;
 	-webkit-box-shadow: 1px 1px 2px #ccc;
-	filter: progid : DXImageTransform.Microsoft.Shadow (
+	filter: progid : DXImageTransform.Microsoft.Shadow(
 		Strength = 2,
-		Direction = 135, Color = "#cccccc" ) \9;
+		Direction = 135, Color = "#cccccc" )\9;
 	text-align: left;
 	color: #888;
 }
