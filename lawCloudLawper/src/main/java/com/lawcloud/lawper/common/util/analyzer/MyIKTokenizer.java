@@ -35,7 +35,7 @@ public class MyIKTokenizer extends Tokenizer {
     }
 
     @Override
-    public boolean incrementToken() throws IOException {
+    public final boolean incrementToken() throws IOException {
         // 清除所有的词元属性
         clearAttributes();
         Lexeme nextLexeme = _IKImplement.next();

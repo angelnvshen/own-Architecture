@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Created by dell on 2017/5/5.
  */
-@RequestMapping("search")
+@RequestMapping("lucene")
 @Controller
 public class SearchController {
     @Autowired
@@ -36,7 +36,7 @@ public class SearchController {
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(HttpServletRequest request, HttpServletResponse response) {
 
-        return "/sou/index";
+        return "/lucene/index";
     }
 
     @ResponseBody
@@ -47,7 +47,7 @@ public class SearchController {
             String attachmentDir = util.getProperty("AttachmentDir");
             String indexDir = util.getProperty("IndexDir");
 
-            if(StringUtils.isEmpty(attachmentDir) || StringUtils.isEmpty(indexDir)){
+            if (StringUtils.isEmpty(attachmentDir) || StringUtils.isEmpty(indexDir)) {
                 throw new Exception("attachmentDir or indexDir 为空");
             }
             indexerService.create_index(attachmentDir, indexDir);
@@ -63,8 +63,8 @@ public class SearchController {
         //int totle = iaDAO.getCountAgent(1);
         //PagingInfo pl = new PagingInfo(totle, 15, page);
         // List<Agentdomain> agentdomain = iaDAO.getListAgent(pl.getMin_t(),15,1);
-//        String keyword = new String(request.getParameter("keyword").getBytes("ISO-8859-1"), "utf-8");
-    	String keyword = request.getParameter("keyword");
+        String keyword = new String(request.getParameter("keyword").getBytes("ISO-8859-1"), "utf-8");
+//        String keyword = request.getParameter("keyword");
         String page = request.getParameter("page");
         String type = request.getParameter("type");
         System.out.println(":|" + keyword.trim() + "|:");
@@ -80,10 +80,50 @@ public class SearchController {
             model.put("keyword", keyword);
             model.put("type", type);
             model.put("page", pl);
-            return "/sou/search";
+            return "/lucene/search";
         } else {
-            return "redirect:/index.page";
+            return "redirect:/lucene/index";
         }
+    }
 
+    @RequestMapping(value = "download", method = RequestMethod.GET)
+    public void download(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws Exception {
+
+        response.setContentType("text/html");
+        javax.servlet.ServletOutputStream out = response.getOutputStream();
+        //String filepath = request.getRealPath("/") + "uploadfile/";
+        System.out.println(request.getParameter("filepath"));
+        String filepath = new String(request.getParameter("filepath").getBytes("ISO8859-1"), "utf-8").toString();//request.getParameter("filepath");//
+        String filename = new String(request.getParameter("filename").getBytes("ISO8859-1"), "utf-8").toString();//request.getParameter("filename");//
+        System.out.println("DownloadFile filepath:" + filepath);
+        System.out.println("DownloadFile filepath:" + filename);
+        //System.out.println("DownloadFile filepath:" + request.getParameter("filename"));
+        //System.out.println("DownloadFile filename:" + filepath.lastIndexOf("\\"));
+
+        //int b = filepath.lastIndexOf("\\");
+        //filepath.substring(b);
+        //System.out.println("DownloadFile filename:" + filepath.substring(b));
+        java.io.File file = new java.io.File(filepath);
+        if (!file.exists()) {
+            System.out.println(file.getAbsolutePath() + " 文件不存在!");
+            return;
+        }
+        // 读取文件流
+        java.io.FileInputStream fileInputStream = new java.io.FileInputStream(file);
+        // 下载文件
+        // 设置响应头和下载保存的文件名
+        if (filename != null && filename.length() > 0) {
+            response.setContentType("application/x-msdownload");
+            response.setHeader("Content-Disposition", "attachment; filename=" + new String(filename.getBytes("gb2312"), "ISO8859-1") + "");
+            if (fileInputStream != null) {
+                int filelen = fileInputStream.available();
+                // 文件太大时内存不能一次读出,要循环
+                byte a[] = new byte[filelen];
+                fileInputStream.read(a);
+                out.write(a);
+            }
+            fileInputStream.close();
+            out.close();
+        }
     }
 }

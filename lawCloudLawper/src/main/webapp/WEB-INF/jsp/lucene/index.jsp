@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="${pageContext.request.contextPath}/static/css/lucene_index.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/static/css/lucene_index.css" rel="stylesheet" type="text/css"/>
     <title>全文检索</title>
 
 </head>
@@ -14,12 +14,12 @@
 <p>&nbsp;</p>
 <div id="m">
     <p id="lg">
-        <img src="${pageContext.request.contextPath}/static/image/baidu_sylogo1.gif" width="270" height="129"
+        <img src="${ctx}/static/image/baidu_sylogo1.gif" width="270" height="129"
              usemap="#mp">
     </p>
 
     <div id="fm">
-        <form name="f" action="lucene/search" method="get">
+        <form name="f" action="${ctx}/lucene/search" method="get">
             <input type="text" name="keyword" id="kw" maxlength="100"/>
             <input type="hidden" name="type" value="">
             <input type="hidden" name="page" value="1">

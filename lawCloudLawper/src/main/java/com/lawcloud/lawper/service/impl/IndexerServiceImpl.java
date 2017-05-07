@@ -8,6 +8,7 @@ import com.lawcloud.lawper.service.IndexerService;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -35,37 +36,37 @@ public class IndexerServiceImpl implements IndexerService {
 
                 if (str[1].equalsIgnoreCase("doc")) {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, Word.getContent(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, Word.getContent(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, str[1], Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("docx")) {
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, Word.getContent2007(files[i].toString()), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, Word.getContent2007(files[i].toString()), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, "doc", Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("xls")) {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, Excel.getContent(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, Excel.getContent(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, str[1], Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("xlsx")) {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, Excel.getContent2007(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, Excel.getContent2007(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, "xls", Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("ppt")) {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, PowerPoint.getContent(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, PowerPoint.getContent(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, str[1], Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("pptx")) {
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, PowerPoint.getContent2007(files[i].toString()), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, PowerPoint.getContent2007(files[i].toString()), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, "ppt", Field.Store.YES));
                 } else if (str[1].equalsIgnoreCase("pdf")) {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, PDF.getContent(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, PDF.getContent(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, str[1], Field.Store.YES));
                 } else {
                     inputStream = new FileInputStream(files[i]);
-                    doc.add(new StringField(LuceneUtil.FILE_CONTENT, Text.getContent(inputStream), Field.Store.YES));
+                    doc.add(new TextField(LuceneUtil.FILE_CONTENT, Text.getContent(inputStream), Field.Store.YES));
                     doc.add(new StringField(LuceneUtil.FILE_TYPE, str[1], Field.Store.YES));
                 }
 
-                doc.add(new StringField(LuceneUtil.FILE_NAME, str[0], Field.Store.YES));
+                doc.add(new TextField(LuceneUtil.FILE_NAME, str[0], Field.Store.YES));
 
                 doc.add(new StringField(LuceneUtil.FILE_PATH, files[i].getAbsolutePath(), Field.Store.YES));
 

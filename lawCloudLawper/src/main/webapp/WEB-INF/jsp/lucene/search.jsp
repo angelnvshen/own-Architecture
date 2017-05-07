@@ -23,7 +23,7 @@
         $(document).ready(function () {
             // var i = 1;
             $("#uploadify").uploadify({
-                'uploader': 'ctx/tools/upload/uploadify.swf',
+                'uploader': 'ctx/static/upload/uploadify.swf',
                 'script': 'ctx/biz/sou/util/Upload',
                 'cancelImg': 'ctx/tools/upload/images/cancel.png',
                 'folder': 'AttachmentDir',
@@ -56,7 +56,7 @@
         function do_index() {
             //alert("here!");
             $.ajax({
-                url: 'do_index.page',
+                url: 'lucene/do_index',
                 type: 'GET',
                 //data:{album_id :  3},
                 //dataType: 'json',

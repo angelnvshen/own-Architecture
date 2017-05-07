@@ -50,7 +50,10 @@ public class SearcherServiceImpl implements SearcherService {
                 query = MultiFieldQueryParser.parse(fields_value, fields, new BooleanClause.Occur[]{BooleanClause.Occur.MUST, BooleanClause.Occur.MUST}, LuceneUtil.ANALYZER_CURRENT_SMART);
 
             } else {
-                QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SMART);
+                //QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SMART);
+
+                String[] fields = {LuceneUtil.FILE_NAME, LuceneUtil.FILE_CONTENT};
+                QueryParser queryParser = new MultiFieldQueryParser(fields, LuceneUtil.ANALYZER_CURRENT_SMART);
                 query = queryParser.parse(keyword);
             }
 

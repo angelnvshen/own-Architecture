@@ -116,29 +116,6 @@ public class UserInfoController extends BashController {
     @ResponseBody
     @RequestMapping("testLucene")
     public String testLucene() throws IOException {
-
-        String str = "体质等方面全面发展";
-
-        Analyzer analyzer = null;
-        analyzer = new MyIkAnalyzer();
-        print(analyzer, str);
-
-        analyzer = new MyIkAnalyzer(true);
-        print(analyzer, str);
         return "parse indexStr";
-    }
-
-    public static void print(Analyzer analyzer, String parseStr) throws IOException {
-        StringReader reader = new StringReader(parseStr);
-        TokenStream tokenStream = analyzer.tokenStream("", reader);
-        tokenStream.reset();
-
-        CharTermAttribute termAttribute = tokenStream.getAttribute(CharTermAttribute.class);
-
-        System.out.println("分词技术：" + analyzer.getClass());
-        while (tokenStream.incrementToken()) {
-            System.out.print(termAttribute.toString() + "|");
-        }
-        System.out.println();
     }
 }

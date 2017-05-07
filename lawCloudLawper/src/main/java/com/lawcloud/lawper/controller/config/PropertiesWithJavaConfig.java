@@ -6,7 +6,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource("classpath:message.properties;classpath:lucene/lucene.properties")
+@PropertySource({
+        "classpath:message.properties",
+        "classpath:lucene/lucene.properties"
+        })
 public class PropertiesWithJavaConfig {
  
    @Bean
