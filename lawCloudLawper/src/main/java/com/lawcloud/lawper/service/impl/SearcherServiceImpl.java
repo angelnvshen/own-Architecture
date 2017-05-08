@@ -2,8 +2,10 @@ package com.lawcloud.lawper.service.impl;
 
 import com.lawcloud.lawper.common.lucene.model.Attachment;
 import com.lawcloud.lawper.common.lucene.util.LuceneUtil;
+import com.lawcloud.lawper.common.lucene.util.StringUtil;
 import com.lawcloud.lawper.common.util.AppCodeConstantUtil;
 import com.lawcloud.lawper.service.SearcherService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
@@ -83,16 +85,28 @@ public class SearcherServiceImpl implements SearcherService {
                 System.out.println(doc.get(LuceneUtil.FILE_PATH));
                 System.out.println(doc.get(LuceneUtil.FILE_DATE));
                 att.setFileid(sdoc.doc);
-                att.setFilename(doc.get(LuceneUtil.FILE_NAME));
                 att.setFiletype(doc.get(LuceneUtil.FILE_TYPE));
 
                 String file_path = doc.get(LuceneUtil.FILE_PATH);
                 file_path = file_path.replaceAll("\\\\", "/");
-                att.setFilepath(file_path);
+                att.setFilepath(StringUtil.getEllipsisStr(file_path));
 
                 att.setFiledate(doc.get(LuceneUtil.FILE_DATE));
-                String str = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SMART, LuceneUtil.FILE_CONTENT, doc.get(LuceneUtil.FILE_CONTENT));
-                att.setHitword(str);
+                //文明标题
+                String str_file_name = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SMART, LuceneUtil.FILE_NAME, doc.get(LuceneUtil.FILE_NAME));
+                if(StringUtils.isEmpty(str_file_name)){
+                    str_file_name = doc.get(LuceneUtil.FILE_NAME);
+                }
+                att.setFilename(str_file_name);
+
+                //文明内容
+                String str_content = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SMART, LuceneUtil.FILE_CONTENT, doc.get(LuceneUtil.FILE_CONTENT));
+                if(StringUtils.isEmpty(str_content)){
+                    String content = doc.get(LuceneUtil.FILE_CONTENT);
+                    int endIndex = Math.min(100, content.length());
+                    str_content = content.substring(0, endIndex);// 最多前50个字符
+                }
+                att.setHitword(str_content);
                 att.setFilescore(sdoc.score);
                 list.add(att);
 

@@ -5,8 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>全文检索</title>
-    <link type="text/css" rel="stylesheet"
-          href="${ctx}/static/css/asCom.css"/>
+    <link type="text/css" rel="stylesheet" href="${ctx}/static/css/asCom.css"/>
     <style type="text/css">
         #wrapper {
             min-width: 800px;
@@ -106,7 +105,7 @@
     <div id="search" class="search-box">
         <div class="s_nav">
             <a href="${ctx}/lucene/index" class="s_logo"><img id="logoImg"
-                                                               src="${ctx}/image/logo-wk.gif"
+                                                               src="${ctx}/static/image/logo-wk.gif"
                                                                width="117" height="38" alt="捷搜文库">
             </a>
         </div>
@@ -193,9 +192,8 @@
                         <span title="pdf" class="pdf icon"></span>
                     </c:if>
 
-
-                    <a href="${ctx}/lucene/Download?filepath=${att.filepath}&filename=${att.filename}.${att.filetype}"
-                       target="_self"><em>${att.filename}</em>
+                    <a href="${ctx}/lucene/Download?filepath=${att.filepath}&filename=${att.filename}.${att.filetype}" target="_self">
+                        <em>${att.filename}</em>
                     </a>
                     <span class="ml12 gray">${att.filedate}</span>
                 </dt>

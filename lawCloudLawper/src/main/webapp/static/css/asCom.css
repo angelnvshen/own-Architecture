@@ -1567,7 +1567,17 @@ h2 {
 	font-size: 14px;
 }
 
-#main dl dt em,p.summary em {
+#main dl dt em {
+	color:-webkit-link;
+	font-style: normal;
+}
+
+#main dl dt em strong{
+	color: #C00;
+	font-style: normal;
+}
+
+p.summary em {
 	color: #C00;
 	font-style: normal;
 }

@@ -26,8 +26,10 @@ package com.lawcloud.lawper.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lawcloud.lawper.common.lucene.util.StringUtil;
 import com.lawcloud.lawper.dao.CountryDao;
 import com.lawcloud.lawper.model.Country;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ import java.util.List;
 /**
  * Created by liuzh on 2015/3/7.
  */
-public class PageMapperTest extends BasicTest {
+public class PageMapperTest{// extends BasicTest {
 
 //    @Autowired
 //    private CountryMapper countryMapper;
@@ -60,4 +62,11 @@ public class PageMapperTest extends BasicTest {
         pageInfo = new PageInfo<Country>(countries);
         System.out.println(pageInfo.getTotal());
     }
+
+    @Test
+    public void test2(){
+        System.out.println("https://translate.google.cn/".length());
+        System.out.println(StringUtil.getEllipsisStr("https://translate.google.cn/dsdv"));
+    }
+
 }
