@@ -49,13 +49,13 @@ public class SearcherServiceImpl implements SearcherService {
                 String[] fields_value = {keyword, type};
                 //MultiFieldQueryParser mquery = new MultiFieldQueryParser(LuceneUtil.VERSION_CURRENT, fields, LuceneUtil.ANALYZER_CURRENT);
                 //QueryFilter qf = new QueryFilter(tq);
-                query = MultiFieldQueryParser.parse(fields_value, fields, new BooleanClause.Occur[]{BooleanClause.Occur.MUST, BooleanClause.Occur.MUST}, LuceneUtil.ANALYZER_CURRENT_SMART);
+                query = MultiFieldQueryParser.parse(fields_value, fields, new BooleanClause.Occur[]{BooleanClause.Occur.MUST, BooleanClause.Occur.MUST}, LuceneUtil.ANALYZER_CURRENT_SYNONYMS);
 
             } else {
-                //QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SMART);
+                //QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SYNONYMS);
 
                 String[] fields = {LuceneUtil.FILE_NAME, LuceneUtil.FILE_CONTENT};
-                QueryParser queryParser = new MultiFieldQueryParser(fields, LuceneUtil.ANALYZER_CURRENT_SMART);
+                QueryParser queryParser = new MultiFieldQueryParser(fields, LuceneUtil.ANALYZER_CURRENT_SYNONYMS);
                 query = queryParser.parse(keyword);
             }
 
@@ -93,14 +93,14 @@ public class SearcherServiceImpl implements SearcherService {
 
                 att.setFiledate(doc.get(LuceneUtil.FILE_DATE));
                 //文明标题
-                String str_file_name = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SMART, LuceneUtil.FILE_NAME, doc.get(LuceneUtil.FILE_NAME));
+                String str_file_name = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SYNONYMS, LuceneUtil.FILE_NAME, doc.get(LuceneUtil.FILE_NAME));
                 if(StringUtils.isEmpty(str_file_name)){
                     str_file_name = doc.get(LuceneUtil.FILE_NAME);
                 }
                 att.setFilename(str_file_name);
 
                 //文明内容
-                String str_content = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SMART, LuceneUtil.FILE_CONTENT, doc.get(LuceneUtil.FILE_CONTENT));
+                String str_content = hl.getBestFragment(LuceneUtil.ANALYZER_CURRENT_SYNONYMS, LuceneUtil.FILE_CONTENT, doc.get(LuceneUtil.FILE_CONTENT));
                 if(StringUtils.isEmpty(str_content)){
                     String content = doc.get(LuceneUtil.FILE_CONTENT);
                     int endIndex = Math.min(100, content.length());
@@ -148,10 +148,10 @@ public class SearcherServiceImpl implements SearcherService {
                 String[] fields_value = {keyword, type};
                 //MultiFieldQueryParser mquery = new MultiFieldQueryParser(LuceneUtil.VERSION_CURRENT, fields, LuceneUtil.ANALYZER_CURRENT);
                 //QueryFilter qf = new QueryFilter(tq);
-                query = MultiFieldQueryParser.parse(fields_value, fields, new BooleanClause.Occur[]{BooleanClause.Occur.MUST, BooleanClause.Occur.MUST}, LuceneUtil.ANALYZER_CURRENT_SMART);
+                query = MultiFieldQueryParser.parse(fields_value, fields, new BooleanClause.Occur[]{BooleanClause.Occur.MUST, BooleanClause.Occur.MUST}, LuceneUtil.ANALYZER_CURRENT_SYNONYMS);
 
             } else {
-                QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SMART);
+                QueryParser queryParser = new QueryParser(LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT_SYNONYMS);
                 query = queryParser.parse(keyword);
             }
             //QueryParser queryParser = new QueryParser(LuceneUtil.VERSION_CURRENT, LuceneUtil.FILE_CONTENT, LuceneUtil.ANALYZER_CURRENT);

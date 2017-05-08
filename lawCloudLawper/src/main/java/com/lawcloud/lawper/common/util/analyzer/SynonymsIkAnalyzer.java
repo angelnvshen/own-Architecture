@@ -1,4 +1,11 @@
-package com.lawcloud.lawper.test.lucene;
+package com.lawcloud.lawper.common.util.analyzer;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.synonym.SynonymFilterFactory;
+import org.apache.lucene.analysis.util.ClasspathResourceLoader;
+import org.apache.lucene.analysis.util.FilesystemResourceLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,20 +15,14 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.lawcloud.lawper.common.util.analyzer.MyIKTokenizer;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.synonym.SynonymFilterFactory;
-import org.apache.lucene.analysis.util.ClasspathResourceLoader;
-import org.apache.lucene.analysis.util.FilesystemResourceLoader;
-import org.wltea.analyzer.lucene.IKTokenizer;
-
-public class SynonymsAnalyzer extends Analyzer {
+/**
+ * ik同义词分析器
+ */
+public class SynonymsIkAnalyzer extends Analyzer {
 	
 	private final String synonymsPath;
 	
-	public SynonymsAnalyzer(String synonymsPath) {
+	public SynonymsIkAnalyzer(String synonymsPath) {
 		if(synonymsPath==null || synonymsPath.isEmpty()) {
 			throw new IllegalArgumentException("synonymsPath must be provided!");
 		}

@@ -2,6 +2,7 @@ package com.lawcloud.lawper.common.lucene.util;
 
 import com.lawcloud.lawper.common.lucene.extractor.Text;
 import com.lawcloud.lawper.common.util.analyzer.MyIkAnalyzer;
+import com.lawcloud.lawper.common.util.analyzer.SynonymsIkAnalyzer;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
@@ -32,6 +33,7 @@ public class LuceneUtil {
 
     public static final Analyzer ANALYZER_CURRENT = new MyIkAnalyzer();
     public static final Analyzer ANALYZER_CURRENT_SMART = new MyIkAnalyzer(true);
+    public static final Analyzer ANALYZER_CURRENT_SYNONYMS = new SynonymsIkAnalyzer("classpath:lucene/synonyms.txt");
 
     public static final String FILE_NAME = "filename";
     public static final String FILE_TYPE = "filetype";
@@ -54,17 +56,21 @@ public class LuceneUtil {
         System.out.println();
     }
 
-    private static String str = "体质等方面全面发展";
+    private static String str = "他囊里本来放着四五十两银子";
 
     public static void main(String[] args) throws IOException, ParseException {
 
-        String fileName =  "C:\\Users\\CHANEL\\Desktop\\tmp\\lucene\\AttachmentDir\\第二回　江南七怪.txt";
-        InputStream inputStream = new FileInputStream(fileName);
-        String str = Text.getContent(inputStream);
+        //String fileName =  "C:\\Users\\CHANEL\\Desktop\\tmp\\lucene\\AttachmentDir\\第二回　江南七怪.txt";
+        //InputStream inputStream = new FileInputStream(fileName);
+        //String str = Text.getContent(inputStream);
 
         LuceneUtil.print(new CJKAnalyzer(), str);
         System.out.println(" ==================== ");
         LuceneUtil.print(new MyIkAnalyzer(), str);
+        System.out.println(" ==================== ");
+        LuceneUtil.print(new MyIkAnalyzer(true), str);
+        System.out.println(" ==================== ");
+        LuceneUtil.print(new SynonymsIkAnalyzer("classpath:lucene/synonyms.txt"), str);
 
         /*Analyzer analyzer = null;
         analyzer = new MyIkAnalyzer();
