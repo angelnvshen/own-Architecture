@@ -2,14 +2,16 @@ package com.lawcloud.lawper.model;
 
 import javax.persistence.*;
 
-public class Authorities {
+@Table(name = "group_members")
+public class GroupMembers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
 
-    private String authority;
+    @Column(name = "group_id")
+    private Long groupId;
 
     /**
      * @return id
@@ -40,16 +42,16 @@ public class Authorities {
     }
 
     /**
-     * @return authority
+     * @return group_id
      */
-    public String getAuthority() {
-        return authority;
+    public Long getGroupId() {
+        return groupId;
     }
 
     /**
-     * @param authority
+     * @param groupId
      */
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 }

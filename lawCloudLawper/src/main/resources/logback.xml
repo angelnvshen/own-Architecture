@@ -43,15 +43,13 @@
         </connectionSource>
     </appender>-->
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="TEST-FILE"/>
-         <!--<appender-ref ref="db-classic-mysql-pool"/> -->
+        <!--<appender-ref ref="db-classic-mysql-pool"/> -->
     </root>
 
-    <logger name="druid.sql" level="debug" />
-    <logger name="druid.sql.Statement" level="debug">
-        <appender-ref ref="CONSOLE"/>
-    </logger>
+    <logger name="com.lawcloud.lawper" level="DEBUG" />
+    <logger name="org.springframework.jdbc" level="DEBUG" />
 
 </configuration>

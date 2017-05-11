@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lawcloud.lawper.dao.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.lawcloud.lawper.model.Users" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+  </resultMap>
+
+  <select id="getByUsername" parameterType="string" resultMap="BaseResultMap" >
+    select * from users where USERNAME = #{username}
+  </select>
+
+  <select id="getGroupAuthoritiesByUsername" parameterType="string" resultMap="com.lawcloud.lawper.dao.GroupAuthoritiesMapper.BaseResultMap" >
+    SELECT
+        ga.*
+    FROM
+        groups g,
+        group_members gm,
+        group_authorities ga
+    WHERE
+        gm.username = #{username}
+    AND g.id = ga.group_id
+    AND g.id = gm.group_id
+
+  </select>
+</mapper>

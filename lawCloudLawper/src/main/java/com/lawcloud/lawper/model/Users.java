@@ -2,14 +2,16 @@ package com.lawcloud.lawper.model;
 
 import javax.persistence.*;
 
-public class Authorities {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
 
-    private String authority;
+    private String password;
+
+    private Boolean enabled;
 
     /**
      * @return id
@@ -40,16 +42,30 @@ public class Authorities {
     }
 
     /**
-     * @return authority
+     * @return password
      */
-    public String getAuthority() {
-        return authority;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param authority
+     * @param password
      */
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return enabled
+     */
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled
+     */
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

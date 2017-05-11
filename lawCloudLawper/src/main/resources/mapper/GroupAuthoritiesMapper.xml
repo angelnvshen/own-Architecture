@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lawcloud.lawper.dao.GroupAuthoritiesMapper" >
-  <resultMap id="BaseResultMap" type="com.lawcloud.lawper.model.GroupAuthorities" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lawcloud.lawper.dao.GroupAuthoritiesMapper">
+  <resultMap id="BaseResultMap" type="com.lawcloud.lawper.model.GroupAuthorities">
     <!--
       WARNING - @mbggenerated
     -->
-    <result column="group_id" property="groupId" jdbcType="BIGINT" />
-    <result column="authority" property="authority" jdbcType="VARCHAR" />
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="authority" jdbcType="VARCHAR" property="authority" />
   </resultMap>
 </mapper>

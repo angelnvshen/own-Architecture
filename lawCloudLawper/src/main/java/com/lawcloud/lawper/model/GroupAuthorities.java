@@ -4,10 +4,28 @@ import javax.persistence.*;
 
 @Table(name = "group_authorities")
 public class GroupAuthorities {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "group_id")
     private Long groupId;
 
     private String authority;
+
+    /**
+     * @return id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * @return group_id
@@ -35,5 +53,14 @@ public class GroupAuthorities {
      */
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupAuthorities{" +
+                "id=" + id +
+                ", groupId=" + groupId +
+                ", authority='" + authority + '\'' +
+                '}';
     }
 }

@@ -78,11 +78,12 @@
         <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>
 
-    <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+    <!--<beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="enableGroups" value="true"/>
         <beans:property name="rolePrefix" value="ROLE_"/>
-    </beans:bean>
+    </beans:bean>-->
+    <beans:bean id="userDetailsService" class="com.lawcloud.lawper.security.CustomUserDetailsService" />
 
     <!-- 认证成功后的处理类 -->
     <beans:bean id="authSuccess" class="com.lawcloud.lawper.security.AuthenticationSuccessHandlerImpl"/>
