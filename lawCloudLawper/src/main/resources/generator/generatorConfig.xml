@@ -51,7 +51,7 @@
 
     <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-    <table tableName="authorities" >
+    <table tableName="url_resources" >
       <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
     </table>
   </context>

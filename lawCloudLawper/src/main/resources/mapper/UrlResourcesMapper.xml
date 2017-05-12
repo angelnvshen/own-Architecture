@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lawcloud.lawper.dao.UrlResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.lawcloud.lawper.model.UrlResources" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="RESOURCE_ID" property="resourceId" jdbcType="VARCHAR" />
+    <result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+    <result column="RESOURCE_DESC" property="resourceDesc" jdbcType="VARCHAR" />
+    <result column="RESOURCE_PATH" property="resourcePath" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <select id="getURLResourceMapping" resultType="java.util.Map" >
+    select DISTINCT ga.authority as authorityMark, ur.RESOURCE_PATH as resourcePath
+      from group_resource gr
+    LEFT JOIN group_authorities ga on gr.group_id = ga.group_id
+    LEFT JOIN url_resources ur on gr.resource_id = ur.RESOURCE_ID
+  </select>
+</mapper>
