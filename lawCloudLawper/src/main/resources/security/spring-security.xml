@@ -6,8 +6,11 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
+
+    <http pattern="/toLogin" security="none" />
+    <http pattern="/authentication_failure_url" security="none" />
     <!--<http auto-config="true" use-expressions="true">-->
-    <http auto-config="false">
+    <http auto-config="true">
         <!-- form-login -->
         <!--
         一：
@@ -75,6 +78,7 @@
         <intercept-url pattern="/**" access="ROLE_USER"/>-->
 
         <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
+        <csrf disabled="true" />
     </http>
 
     <!--
@@ -95,13 +99,13 @@
     <!-- 认证成功后的处理类 -->
     <beans:bean id="authSuccess" class="com.lawcloud.lawper.security.AuthenticationSuccessHandlerImpl"/>
 
-    <!--自定义SecurityMetadataSource  -->
-    <beans:bean id="securityMetadataSource" class="com.lawcloud.lawper.security.URLFilterInvocationSecurityMetadataSource"/>
-
     <!-- 认证过滤器 -->
     <beans:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <!-- 用户拥有的权限 -->
         <beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+        <!-- 用户是否拥有所请求资源的权限 -->
         <beans:property name="authenticationManager" ref="authenticationManager" />
+        <!-- 资源与权限对应关系 -->
         <beans:property name="securityMetadataSource" ref="securityMetadataSource" />
     </beans:bean>
 
@@ -115,14 +119,17 @@
         </beans:constructor-arg>
     </beans:bean>
 
-    <!-- 授权管理器 -->
-    <beans:bean id="accessDecisionManager" class="com.lawcloud.lawper.security.CustomUserAccessDecisionManager" />
-
     <beans:bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
         <beans:property name="rolePrefix" value="ROLE_"/>
     </beans:bean>
 
     <beans:bean id="authenticatedVoter" class="org.springframework.security.access.vote.AuthenticatedVoter" />
+
+    <!-- 授权管理器 -->
+    <beans:bean id="accessDecisionManager" class="com.lawcloud.lawper.security.CustomAccessDecisionManager" />
+
+    <!--自定义SecurityMetadataSource  -->
+    <beans:bean id="securityMetadataSource" class="com.lawcloud.lawper.security.URLFilterInvocationSecurityMetadataSource"/>
 </beans:beans>
 
 

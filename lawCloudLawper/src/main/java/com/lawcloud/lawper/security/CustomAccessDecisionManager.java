@@ -16,7 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @time 2017-1-10 
  *  
  */  
-public class CustomUserAccessDecisionManager implements AccessDecisionManager  {
+public class CustomAccessDecisionManager implements AccessDecisionManager  {
 
     /* (non-Javadoc) 
      * @see org.springframework.security.access.AccessDecisionManager#decide(org.springframework.security.core.Authentication, java.lang.Object, java.util.Collection) 
@@ -45,7 +45,7 @@ public class CustomUserAccessDecisionManager implements AccessDecisionManager  {
             }  
         }  
         //没有权限    
-        throw new AccessDeniedException(" 没有权限访问！ ");    
+        throw new AccessDeniedException(" 没有权限访问！ ");
     }
   
     @Override  
