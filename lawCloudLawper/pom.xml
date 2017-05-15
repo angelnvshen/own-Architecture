@@ -38,7 +38,7 @@
         <!-- jackson -->
         <jackson-databind.version>2.8.7</jackson-databind.version>
         <!-- cache -->
-        <ehcache.version>3.3.1</ehcache.version>
+        <ehcache.version>2.10.3</ehcache.version>
     </properties>
 
     <dependencies>
@@ -124,6 +124,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
         </dependency>
 
         <!--spring-oxm依赖-->
@@ -274,7 +278,7 @@
 
         <!-- cache -->
         <dependency>
-            <groupId>org.ehcache</groupId>
+            <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>${ehcache.version}</version>
         </dependency>

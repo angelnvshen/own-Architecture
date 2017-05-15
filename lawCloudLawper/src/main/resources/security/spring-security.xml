@@ -85,9 +85,18 @@
         需要注意的是使用 jdbc-user-service 定义的 UserDetailsService 是不支持用户组权限的，
         如果需要支持用户组权限的话需要我们使用 JdbcDaoImpl
     -->
-    <authentication-manager alias="authenticationManager">
+    <!--<authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsService" />
+    </authentication-manager>-->
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="authenticationProvider" />
     </authentication-manager>
+
+    <beans:bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="userDetailsService" />
+        <beans:property name="userCache" ref="userCache" />
+    </beans:bean>
 
     <!--<beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>
