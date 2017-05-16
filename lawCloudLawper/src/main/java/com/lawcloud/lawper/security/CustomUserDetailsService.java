@@ -29,10 +29,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = (User) userCache.getUserFromCache(username);
+        logger.info("get User from cache : {}", user);
         if (user == null) {
 
             Users user_db = usersMapper.getByUsername(username);
-            logger.info("User : {}", user_db);
+            logger.info("get User from db : {}", user_db);
             if (user_db == null) {
                 logger.info("User not found");
                 throw new UsernameNotFoundException("Username not found");
