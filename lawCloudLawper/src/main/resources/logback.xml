@@ -43,7 +43,7 @@
         </connectionSource>
     </appender>-->
 
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="TEST-FILE"/>
         <!--<appender-ref ref="db-classic-mysql-pool"/> -->
