@@ -25,4 +25,4 @@ nbdist/
 
 LOG_PATH_IS_UNDEFINED/
 
-lawCloudLawper/src/main/resources/config.properties
+config.properties

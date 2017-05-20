@@ -87,7 +87,9 @@
     -->
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsService" >
-            <password-encoder ref="md5Encoder" />
+            <password-encoder ref="md5Encoder">
+                <salt-source user-property="username" />
+            </password-encoder>
         </authentication-provider>
     </authentication-manager>
 

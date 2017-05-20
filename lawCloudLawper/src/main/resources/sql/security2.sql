@@ -2,7 +2,7 @@ drop table if exists users;
 create table users (
     id bigint NOT NULL AUTO_INCREMENT primary key,
     username varchar(50) not null,
-    password varchar(50) not null,
+    password varchar(100) not null,
     enabled boolean not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
