@@ -23,6 +23,8 @@
         <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 
         <csrf disabled="true" />
+
+        <remember-me  />
     </http>
 
     <!--
