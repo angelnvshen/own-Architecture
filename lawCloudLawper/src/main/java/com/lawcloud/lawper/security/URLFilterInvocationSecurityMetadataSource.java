@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -80,7 +81,11 @@ public class URLFilterInvocationSecurityMetadataSource implements
         while(it.hasNext()){  
             Map<String,String> rs = it.next();  
             String resourcePath = rs.get("resourcePath");  
-            String authorityMark = rs.get("authorityMark");  
+            String authorityMark = rs.get("authorityMark");
+
+            if(StringUtils.isNotEmpty(authorityMark)){
+                authorityMark = "ROLE_" + authorityMark;
+            }
               
             if(map.containsKey(resourcePath)){  
                 String mark = map.get(resourcePath);
