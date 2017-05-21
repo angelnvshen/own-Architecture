@@ -24,7 +24,7 @@
 
         <csrf disabled="true" />
 
-        <remember-me  />
+        <remember-me token-validity-seconds="120" token-repository-ref="persistentTokenRepository" />
     </http>
 
     <!--
@@ -73,6 +73,12 @@
     </beans:bean>
 
     <beans:bean id="authenticatedVoter" class="org.springframework.security.access.vote.AuthenticatedVoter" />
+
+    <!-- rememberMe by persistent-->
+    <beans:bean id="persistentTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="createTableOnStartup" value="true" />
+    </beans:bean>
 </beans:beans>
 
 
