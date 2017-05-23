@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: CHANEL
@@ -13,6 +14,12 @@
 <body>
 <form action="login.do" method="post">
     <table>
+        <%--<%=((Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage()%>;--%>
+            <c:if test="${param.auth eq 'failure'}">
+                <div class="error">
+                    <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+                </div>
+            </c:if>
         <tr>
             <td> 用户名：</td>
             <td><input type="text" name="username"/></td>
