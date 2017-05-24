@@ -66,7 +66,7 @@
                     always-use-default-target="true"
                     authentication-success-handler-ref="authSuccess"
 
-                    authentication-failure-url="/toLogin?auth=failure"
+                    authentication-failure-url="/toLogin?error=true"
         />
         <!-- 表示匿名用户可以访问 -->
         <!--<intercept-url pattern="/toLogin" access="hasRole('ANONYMOUS')" />
@@ -86,7 +86,7 @@
         如果需要支持用户组权限的话需要我们使用 JdbcDaoImpl
     -->
     <authentication-manager alias="authenticationManager">
-        <authentication-provider ref="customAuthenticationProvider" />
+        <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>
 
     <!--<beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
@@ -94,9 +94,6 @@
         <beans:property name="enableGroups" value="true"/>
         <beans:property name="rolePrefix" value="ROLE_"/>
     </beans:bean>-->
-
-    <beans:bean id="customAuthenticationProvider" class="com.lawcloud.lawper.security.CustomAuthenticationProvider" />
-
     <beans:bean id="userDetailsService" class="com.lawcloud.lawper.security.CustomUserDetailsService" />
 
     <!-- 认证成功后的处理类 -->
