@@ -66,7 +66,7 @@
                     always-use-default-target="true"
                     authentication-success-handler-ref="authSuccess"
 
-                    authentication-failure-url="/toLogin?error=true"
+                    authentication-failure-url="/toLogin?auth=failure"
         />
         <!-- 表示匿名用户可以访问 -->
         <!--<intercept-url pattern="/toLogin" access="hasRole('ANONYMOUS')" />
