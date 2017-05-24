@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>国家(地区)信息</title>
@@ -19,6 +20,9 @@
             <td><input type="submit" value="保存"/></td>
         </tr>
     </table>
+    <security:authorize access="isAuthenticated()">
+        authenticated ： <security:authentication property="principal.username" />
+    </security:authorize>
 </form>
 </body>
 </html>

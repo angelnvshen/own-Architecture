@@ -8,6 +8,8 @@
 
     <http pattern="/toLogin" security="none" />
     <http pattern="/authentication_failure_url" security="none" />
+    <http pattern="/static/**" security="none" />
+    <http pattern="/**/*.js.map" security="none" />
     <!--<http auto-config="true" use-expressions="true">-->
     <http auto-config="true">
 
@@ -20,6 +22,7 @@
                     authentication-failure-url="/authentication_failure_url"
         />
 
+        <!--<intercept-url pattern="/toLogin" access="permitAll" />-->
         <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 
         <csrf disabled="true" />
@@ -77,7 +80,7 @@
     <!-- rememberMe by persistent-->
     <beans:bean id="persistentTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
         <beans:property name="dataSource" ref="dataSource" />
-        <beans:property name="createTableOnStartup" value="true" />
+        <beans:property name="createTableOnStartup" value="false" />
     </beans:bean>
 </beans:beans>
 
