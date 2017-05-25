@@ -36,6 +36,8 @@
         </tr>
     </table>
     <%--<input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />--%>
+    -- : ${username} - ${password}
+    -- : ${sessionScope.username} - ${sessionScope.password}
 </form>
 </body>
 </html>

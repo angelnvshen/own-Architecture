@@ -1,14 +1,16 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:util="http://www.springframework.org/schema/util"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd">
+		http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-    <http pattern="/toLogin" security="none" />
-    <http pattern="/authentication_failure_url" security="none" />
+    <http pattern="/static/**" security="none" />
     <!--<http auto-config="true" use-expressions="true">-->
     <http auto-config="true">
         <!-- form-login -->
@@ -65,8 +67,7 @@
                     default-target-url="/default_target_url"
                     always-use-default-target="true"
                     authentication-success-handler-ref="authSuccess"
-
-                    authentication-failure-url="/toLogin?auth=failure"
+                    authentication-failure-handler-ref="authFail"
         />
         <!-- 表示匿名用户可以访问 -->
         <!--<intercept-url pattern="/toLogin" access="hasRole('ANONYMOUS')" />
@@ -99,8 +100,13 @@
     <!-- 认证成功后的处理类 -->
     <beans:bean id="authSuccess" class="com.lawcloud.lawper.security.AuthenticationSuccessHandlerImpl"/>
 
+    <beans:bean id="authFail" class="com.lawcloud.lawper.security.TestAuthenticationFailureHandler" >
+        <beans:property name="defaultFailureUrl" value="/toLogin?auth=failure" />
+        <!--<beans:property name="useForward" value="false" />-->
+    </beans:bean>
+
     <!-- 认证过滤器 -->
-    <beans:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+    <beans:bean id="filterSecurityInterceptor" class="com.lawcloud.lawper.security.CustomFilterSecurityInterceptor">
         <!-- 用户拥有的权限 -->
         <beans:property name="accessDecisionManager" ref="accessDecisionManager" />
         <!-- 用户是否拥有所请求资源的权限 -->
@@ -130,8 +136,18 @@
 
     <!--自定义SecurityMetadataSource  -->
     <beans:bean id="securityMetadataSource" class="com.lawcloud.lawper.security.URLFilterInvocationSecurityMetadataSource"/>
-</beans:beans>
 
+    <!-- 安全资源白名单(URL) -->
+    <beans:bean id="securityMetadataSourceTrustListHolder"
+                class="com.lawcloud.lawper.security.SecurityMetadataSourceTrustListHolder">
+        <beans:property name="trustList">
+            <util:list>
+                <beans:value>/toLogin</beans:value>
+                <beans:value>/authentication_failure_url</beans:value>
+            </util:list>
+        </beans:property>
+    </beans:bean>
+</beans:beans>
 
 
 
