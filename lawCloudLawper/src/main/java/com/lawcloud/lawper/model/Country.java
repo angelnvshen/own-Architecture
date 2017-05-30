@@ -28,8 +28,9 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
-public class Country {
+public class Country implements Serializable{
     /**
      * 主键
      */
@@ -100,5 +101,14 @@ public class Country {
      */
     public void setCountrycode(String countrycode) {
         this.countrycode = countrycode;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "id=" + id +
+                ", countryname='" + countryname + '\'' +
+                ", countrycode='" + countrycode + '\'' +
+                '}';
     }
 }

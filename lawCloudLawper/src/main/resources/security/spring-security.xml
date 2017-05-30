@@ -89,7 +89,7 @@
         <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>-->
 
-    <authentication-manager alias="authenticationManager">
+    <authentication-manager alias="authenticationManager" erase-credentials="false">
         <authentication-provider ref="authenticationProvider" />
     </authentication-manager>
 
