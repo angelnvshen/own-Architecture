@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="own.stu.spring"/>
+
+    <bean id="newsBean" class="own.stu.spring.ioc.beanFactory.model.FXNewsBean" scope="prototype" />
+
+    <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister" >
+        <!--<property name="newsBean" ref="newsBean" />-->
+
+        <!--方法注入-->
+        <!--当getNewsBean 方法被调用的时候，容器可以每次返回一个新的 FXNewsBean 类型的实例-->
+        <lookup-method name="getNewsBean" bean="newsBean" />
+    </bean>
+</beans>
