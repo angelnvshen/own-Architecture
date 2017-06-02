@@ -12,11 +12,5 @@
 
     <bean id="newsBean" class="own.stu.spring.ioc.beanFactory.model.FXNewsBean" scope="prototype" />
 
-    <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister" >
-        <!--<property name="newsBean" ref="newsBean" />-->
-
-        <!--方法注入-->
-        <!--当getNewsBean 方法被调用的时候，容器可以每次返回一个新的 FXNewsBean 类型的实例-->
-        <lookup-method name="getNewsBean" bean="newsBean" />
-    </bean>
+    <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister" />
 </beans>
