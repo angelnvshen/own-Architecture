@@ -12,5 +12,13 @@
 
     <bean id="newsBean" class="own.stu.spring.ioc.beanFactory.model.FXNewsBean" scope="prototype" />
 
-    <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister" />
+    <bean id="newsBeanFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName">
+            <idref bean="newsBean" />
+        </property>
+    </bean>
+
+    <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister">
+        <property name="newsBeanFactory" ref="newsBeanFactory" />
+    </bean>
 </beans>
