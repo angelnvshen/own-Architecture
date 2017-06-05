@@ -20,6 +20,6 @@ public class BeanFactoryTest {
     @Test
     public void testScope(){
         mockPersister.persistNews();
-        mockPersister.persistNews();
+//        mockPersister.persistNews();
     }
 }

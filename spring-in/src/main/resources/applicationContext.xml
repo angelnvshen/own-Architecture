@@ -20,5 +20,8 @@
 
     <bean id="mockPersister" class="own.stu.spring.ioc.beanFactory.service.impl.MockNewsPersister">
         <property name="newsBeanFactory" ref="newsBeanFactory" />
+        <replaced-method name="persistNews" replacer="providerReplacer"/>
     </bean>
+
+    <bean id="providerReplacer" class="own.stu.spring.ioc.beanFactory.util.FXNewsProviderMethodReplacer" />
 </beans>
